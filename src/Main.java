@@ -1,10 +1,10 @@
-import model.MedicalStaff;
-import util.Console;
+import db.DB;
 import model.Employee;
+import util.Console;
 import util.LngConstants;
 
+import java.sql.SQLOutput;
 import java.util.Scanner;
-
 
 /**
  * Classe principal
@@ -13,59 +13,64 @@ public class Main {
 
     public static void main(String[] args) {
 
-        //INSTÂNCIAS
-        Scanner sc = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         Employee employee = new Employee();
 
+        //INICIANDO APLICAÇÃO
+        Console.welcome();
+
         while (true) {
-            //IMPRESSÃO DAS OPÇÕES DISPONÍVEIS NO SISTEMA.
             Console.options();
 
-            int option = sc.nextInt();
-            switch (option) {
-                //REALIZA O CADASTRO DE UM FUNCIONÁRIO.
+            int Options = scanner.nextInt();
+
+            switch (Options) {
+
+                //ADICIONA UM FUNCIONÁRIO NO SISTEMA
                 case 1:
-                    System.out.print("-Informe o nome -> ");
-                    sc.nextLine(); String name = sc.nextLine();
-                    System.out.print("-Informe o id -> ");
-                    int id = sc.nextInt();
+                    System.out.println("\n" + LngConstants.REGISTERED + "\n");
 
+                    System.out.print("Informe o nome do Funcionário -> ");
+                    scanner.nextLine();
+                    String name = scanner.nextLine();
+
+                    //OPÇÕES DE CARGO DISPONÍVEIS
                     Console.medicalStaff();
-                    sc.nextLine(); int medicalStaff = sc.nextInt();
 
-                    System.out.print("-Informe o salário -> ");
-                    double salary = sc.nextDouble();
+                    int id = scanner.nextInt();
+                    String office = employee.getOffice(id);
 
-                    Employee addEmployee = new Employee(name,id,salary, MedicalStaff.resoultMedicalStaff(medicalStaff));
-                    employee.registerEmployee(addEmployee);
-                    System.out.println("\n");
+                    System.out.print("Informe o valor do salário -> ");
+                    double salary = scanner.nextDouble();
+
+                    //CRIANDO UM FUNCIONÁRIO
+                    employee = new Employee(name, salary,office);
+                    employee.registerEmployee(employee);
                     break;
-                //MOSTRA TODOS OS FUNCIONÁRIOS DO SISTEMA.
+                //LISTAR FUNCIONÁRIOS
                 case 2:
+                    System.out.println(LngConstants.REGISTERED_EMPLOYEE + "\n");
                     employee.showEmployeelist();
-                    System.out.println("\n");
                     break;
-                //PESQUISA POR UM FUNCIONÁRIO.
+                //BUSCAR FUNCIONÁRIO
                 case 3:
-                    sc.nextLine();
-                    System.out.print("Informe o id do funcionário que deseja buscar -> ");
-                    int searchEmplooyee = sc.nextInt();
-                    System.out.println("\n");
-                    employee.searchEmployee(searchEmplooyee);
+                    System.out.print("Digite o ID do funcionário que deseja buscar -> ");
+                    int userid = scanner.nextInt();
+                    employee.searchEmployee(userid);
                     break;
-                //EXCLUI UM FUNCIONÁRIO DO SISTEMA.
+                //REMOVER FUNCIONÁRIO
                 case 4:
-                    sc.nextLine();
-                    System.out.print("Informe o id do funcionário que deseja excluir -> ");
-                    int deletEmplooyee = sc.nextInt();
-                    employee.deleteEmployee(deletEmplooyee);
+                    System.out.print("Digite o ID do funcionário que deseja remover do sistema -> ");
+                    int Userid = scanner.nextInt();
+                    employee.deleteEmployee(Userid);
                     break;
-                //SAÍDA.
+                //SAIR DO LOOP
                 case 0:
-                    System.exit(0);
-                //OPÇÃO INVÁLIDA.
+                    System.exit(1);
+                    DB.closeConnection();
+                //OPÇÃO INVÁLIDA
                 default:
-                    System.out.println(LngConstants.INVALID_OPTION + "\n");
+                    System.out.println(LngConstants.INVALID_OPTION);
                     break;
             }
         }

@@ -1,7 +1,5 @@
 package util;
 
-import model.MedicalStaff;
-
 /**
  * Classe utilitária de itens que são impressos no console.
  */
@@ -25,13 +23,20 @@ public class Console{
      */
     public static void medicalStaff(){
         System.out.println("\n");
-        System.out.println("----------Qual cargo ele irá ocupar ?----------\n");
-        System.out.println("1- Clínico Geral\n");
-        System.out.println("2- Pediatra\n");
-        System.out.println("3- Ortopedista\n");
-        System.out.println("4- Enfermeiro\n");
-        System.out.println("5- Técnico de Enfermagem\n");
-        System.out.println("6- Médico Terceirizado\n");
+        System.out.println("Cargo de ocupação.\n");
+        System.out.println("1- CLÍNICO GERAL\n");
+        System.out.println("2- PEDIATRA\n");
+        System.out.println("3- ORTOPEDISTA\n");
+        System.out.println("4- ENFERMEIRO\n");
+        System.out.println("5- TÉCNICO DE ENFERMAGEM\n");
+        System.out.println("6- MÉDICO TERCEIRIZADO\n");
+    }
+
+    /**
+     * Boas vindas ao sistema.
+     */
+    public static void welcome(){
+        System.out.println("\nSEJA BEM VINDO A CLÍNICA BEM VIVER!");
     }
 
 }
