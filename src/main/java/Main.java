@@ -1,9 +1,9 @@
 import db.DB;
 import model.Employee;
+import org.springframework.beans.factory.annotation.Autowired;
 import util.Console;
 import util.LngConstants;
 
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 /**
